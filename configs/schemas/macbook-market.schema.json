@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MacBook market inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "title",
+    "price",
+    "currency",
+    "url"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "title": "Назва"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical URL of this individual listing, without tracking parameters."
+    },
+    "external_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Seller's description of this listing, preserving source claims."
+    },
+    "price": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "title": "Ціна"
+    },
+    "currency": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[A-Z]{3}$",
+      "title": "Валюта"
+    },
+    "chip": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Explicit Apple chip normalized as M4, M4 Pro, M4 Max, etc. Do not infer missing hardware specifications.",
+      "title": "Чип"
+    },
+    "screen_inches": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Explicit advertised screen diagonal, as a category string such as 13, 13.6, 14, 14.2, 15, 15.3, 16. Do not infer missing screen size.",
+      "title": "Екран"
+    },
+    "ram_gb": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "title": "Оперативна пам’ять",
+      "x-unit": "GB"
+    },
+    "storage_gb": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1,
+      "description": "Advertised nominal SSD capacity in GB. Convert explicitly stated TB to 1024 GB. If the title says 512 and description says 500, retain title capacity 512 and list this disagreement in source_conflicts.",
+      "title": "SSD",
+      "x-unit": "GB"
+    },
+    "listing_type": {
+      "enum": [
+        "device",
+        "parts",
+        "accessory",
+        "service",
+        null
+      ],
+      "description": "What is being sold: complete laptop device, parts/disassembly (розбірка/запчастини), accessory or service. Do not treat a parts listing as a working laptop."
+    },
+    "condition": {
+      "enum": [
+        "new",
+        "used",
+        "refurbished",
+        "open_box",
+        null
+      ],
+      "title": "Стан"
+    },
+    "battery_cycles": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "Explicit battery charge cycle count, unknown is null.",
+      "title": "Цикли батареї"
+    },
+    "battery_health": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100,
+      "title": "Здоров’я батареї",
+      "x-unit": "%"
+    },
+    "mdm_status": {
+      "enum": [
+        "claimed_clear",
+        "claimed_managed",
+        "claimed_bypass",
+        null
+      ],
+      "description": "Only an EXPLICIT statement about MDM, remote management or corporate enrollment. Claimed_clear requires explicit denial of MDM/corporate enrollment. No iCloud lock, signing out of Apple ID, clean/reset Mac or 'everything works' does NOT prove absence of MDM: return null. A claim is never a verified device check.",
+      "title": "MDM"
+    },
+    "source_conflicts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Explicit contradictions within the listing (e.g. different SSD capacities in title and description). Empty array if none observed; do not invent conflicts.",
+      "title": "Суперечності"
+    },
+    "availability": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Availability explicitly stated for THIS listing on the DETAIL page. Preserve InStock / OutOfStock / PreOrder or seller stock wording. Sold/Продано/Нет в наличии/Очікується must not be marked in stock. Unknown is null. Detail status takes precedence over catalog card.",
+      "title": "Наявність",
+      "x-display-role": "status"
+    },
+    "condition_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Short exact seller statement about physical condition, e.g. як новий, Open Box, New Unboxed, ідеальний стан. Do not infer like-new solely from a new battery or low cycle count.",
+      "title": "Стан зі слів продавця"
+    }
+  },
+  "x-display": {
+    "columns": [
+      "title",
+      "price",
+      "chip",
+      "ram_gb",
+      "storage_gb",
+      "screen_inches",
+      "condition_text",
+      "battery_cycles",
+      "mdm_status",
+      "availability"
+    ]
+  }
+}

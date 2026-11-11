@@ -1,0 +1,34 @@
+@charset "UTF-8";
+@font-face {
+  font-family: Inter;
+  src: url("/static/assets/fonts/inter-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Roboto Condensed";
+  src: url("/static/assets/fonts/roboto-condensed-variable.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --bg: #eeeee5;
+  --paper: #f5f4ec;
+  --ink: #10110e;
+  --muted: #64675b;
+  --line: #10110e33;
+  --rule: #10110e55;
+  --olive: #59664b;
+  --olive-soft: #e1e5d7;
+  --orange: #c85223;
+  --orange-ink: #9e3d17;
+  --red: #a23529;
+  --radius: 4px;
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  font-synthesis: none;
+}

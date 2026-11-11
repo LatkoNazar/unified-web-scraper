@@ -1,0 +1,43 @@
+name: macbooks-web
+content_profile: commerce
+assessment_profile: device
+currency_aliases:
+  UAH: UAH
+  грн: UAH
+  грн.: UAH
+  ₴: UAH
+sources: []
+search: Знайди MacBook Air 15 M4 24GB у продажу в Україні
+schema_path: ../schemas/macbook.schema.json
+outputs: [jsonl, parquet]
+discovery:
+  enabled: true
+  query_mode: ai
+  max_queries: 1
+  search_results: 3
+  pages_per_site: 4
+  engine: parallel
+  mode: basic
+  cache_ttl_seconds: 3600
+crawl:
+  backend: browser
+  max_pages: 12
+  max_records: 6
+  max_depth: 3
+  concurrency: 1
+  delay: 1
+ai:
+  enabled: true
+  model: qwen/qwen3.7-flash
+  decision_model: openai/gpt-6-luna-decisions
+  response_mode: auto
+  routing: hybrid
+  reasoning: false
+  sparse_enrichment: true
+  max_calls: 20
+navigation:
+  mode: hybrid
+assessment:
+  - is_relevant
+  - has_mdm_risk
+  - requires_manual_review

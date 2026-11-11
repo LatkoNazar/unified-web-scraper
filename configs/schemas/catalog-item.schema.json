@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["title", "price", "currency"],
+  "properties": {
+    "title": {"type": "string", "minLength": 1},
+    "url": {"type": "string", "format": "uri"},
+    "description": {"type": ["string", "null"]},
+    "price": {
+      "type": "number",
+      "minimum": 0,
+      "description": "The explicit price for this individual item. Preserve source currency; do not convert or use a category-wide minimum."
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$",
+      "description": "ISO currency code supported by the source, for example GBP for an explicit pound sterling price."
+    },
+    "availability": {"type": ["string", "null"]}
+  }
+}

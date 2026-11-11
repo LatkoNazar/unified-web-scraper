@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Unified — пошук і збір даних</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='3' fill='%2359664b'/%3E%3Cpath d='M12 12v11a8 8 0 0 0 16 0V12' fill='none' stroke='white' stroke-width='4'/%3E%3C/svg%3E"
+    />
+    <link
+      rel="preload"
+      href="/static/assets/fonts/inter-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/assets/fonts/roboto-condensed-variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="/static/app.css" />
+    <script type="module" src="/static/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Перейти до вмісту</a>
+    <div class="workspace">
+      <aside class="sidebar" aria-label="Пошуки">
+        <a class="brand" href="/" aria-label="Unified — головна">
+          <span class="brand-mark" aria-hidden="true">u<span>↗</span></span>
+          <span>unified</span>
+        </a>
+        <button id="new-search" class="new-search" type="button">
+          <span aria-hidden="true">＋</span> Новий пошук
+        </button>
+        <details class="history-disclosure" open>
+          <summary>Історія пошуків <span aria-hidden="true">↙</span></summary>
+          <div class="sidebar-heading">
+            <span>Історія</span
+            ><button
+              id="refresh-history"
+              class="icon-button"
+              type="button"
+              aria-label="Оновити історію"
+            >
+              ↻
+            </button>
+          </div>
+          <nav id="history" class="history" aria-label="Історія запусків">
+            <p class="sidebar-empty">Завантажуємо історію…</p>
+          </nav>
+        </details>
+        <div class="sidebar-bottom">
+          <a
+            href="/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Документація API"
+            >API ↗</a
+          >
+        </div>
+      </aside>
+
+      <main id="main" class="main">
+        <header class="topbar">
+          <div class="topbar-title">
+            <h1>Збір даних</h1>
+            <span id="connection" class="connection" role="status"
+              ><span aria-hidden="true"></span> Готовий до роботи</span
+            >
+          </div>
+          <div class="run-actions">
+            <div
+              id="cost-summary"
+              class="cost-summary"
+              role="status"
+              aria-live="polite"
+              hidden
+            >
+              <span id="cost-label">Вартість</span>
+              <strong id="cost-value">—</strong>
+              <span id="cost-note">Очікуємо дані</span>
+            </div>
+            <button
+              id="resume-button"
+              class="button button-primary"
+              type="button"
+              hidden
+            >
+              Продовжити
+            </button>
+            <button
+              id="update-button"
+              class="button button-primary"
+              type="button"
+              hidden
+            >
+              Дозібрати
+            </button>
+            <button
+              id="cancel-button"
+              class="button button-quiet"
+              type="button"
+              hidden
+            >
+              Зупинити збір
+            </button>
+          </div>
+        </header>
+        <div class="content">
+          <section class="composer panel" aria-labelledby="query-label">
+            <form id="search-form">
+              <label id="query-label" class="field-label sr-only" for="query"
+                >Що шукаємо?</label
+              >
+              <textarea
+                id="query"
+                name="query"
+                maxlength="4000"
+                rows="2"
+                required
+                placeholder="Що знайти та які дані зібрати?"
+              ></textarea>
+              <div class="composer-bottom">
+                <button
+                  id="start-button"
+                  class="button button-primary"
+                  type="submit"
+                >
+                  <span>Почати збір</span><span aria-hidden="true">↗</span>
+                </button>
+              </div>
+              <details class="advanced">
+                <summary>
+                  Налаштування <span aria-hidden="true">＋</span>
+                </summary>
+                <div class="advanced-content">
+                  <div class="quick-options">
+                    <label class="compact-select"
+                      ><span>Профіль</span
+                      ><select id="profile" name="profile">
+                        <option value="">Автоматично</option>
+                      </select></label
+                    ><label class="compact-select"
+                      ><span>Завантаження</span
+                      ><select id="backend" name="backend">
+                        <option value="browser">Браузер</option>
+                        <option value="http">HTTP</option>
+                      </select></label
+                    >
+                  </div>
+
+                  <label class="field-label" for="sources"
+                    >Сайти або сторінки
+                    <span class="optional">необов’язково</span></label
+                  ><textarea
+                    id="sources"
+                    rows="2"
+                    placeholder="https://example.org/&#10;Один сайт або сторінка в рядку"
+                    spellcheck="false"
+                  ></textarea>
+                  <p class="field-help">
+                    Один HTTP(S) URL у рядку. Без списку сайтів джерела знайде
+                    вебпошук.
+                  </p>
+                  <div class="limit-grid">
+                    <label for="max-pages"
+                      >Ліміт сторінок<input
+                        id="max-pages"
+                        type="number"
+                        min="1"
+                        max="500"
+                        value="30"
+                        required /></label
+                    ><label for="max-records"
+                      >Ліміт записів<input
+                        id="max-records"
+                        type="number"
+                        min="1"
+                        max="1000"
+                        value="50"
+                        required /></label
+                    ><label for="max-calls"
+                      >Ліміт AI-запитів<input
+                        id="max-calls"
+                        type="number"
+                        min="0"
+                        max="500"
+                        value="30"
+                        required
+                    /></label>
+                  </div>
+                  <label class="checkbox-label"
+                    ><input id="ai-enabled" type="checkbox" checked /> AI для
+                    схеми, навігації та витягування</label
+                  >
+                  <label class="checkbox-label"
+                    ><input id="incremental-enabled" type="checkbox" /> Лише
+                    нові сторінки</label
+                  >
+                  <p class="field-help">
+                    Запити до моделей і вебпошук можуть використовувати ваші
+                    API-кредити. Без AI використовуються правила та фіксована
+                    схема; вебпошук усе одно платний.
+                  </p>
+                </div>
+              </details>
+            </form>
+          </section>
+          <div id="notice" class="notice" role="alert" hidden></div>
+
+          <section
+            id="run-panel"
+            class="run-panel"
+            aria-label="Прогрес збору"
+            hidden
+          >
+            <div class="run-heading">
+              <div class="run-heading-text">
+                <span id="run-status" class="status-badge">В черзі</span>
+                <h2 id="run-question"></h2>
+              </div>
+            </div>
+            <p id="run-stop-message" class="run-reason" hidden></p>
+            <p id="incremental-note" class="field-help" hidden>
+              <span id="incremental-summary"></span>
+              <a id="parent-run-link" hidden>Попередня вибірка ↗</a>
+            </p>
+            <div class="stats-grid">
+              <div class="stat">
+                <span class="stat-label">Записів</span
+                ><strong id="stat-records">0</strong
+                ><span class="sr-only" id="records-note"
+                  >Очікуємо результати</span
+                >
+              </div>
+              <div class="stat">
+                <span class="stat-label">Сторінок</span
+                ><strong id="stat-pages">0 <small>/ 30</small></strong
+                ><span class="sr-only" id="pages-note">Ліміт обходу</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">AI-запитів</span
+                ><strong id="stat-ai">—</strong
+                ><span class="sr-only" id="ai-note">Фактичне використання</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">Час</span
+                ><strong id="stat-time">0:00</strong
+                ><span class="sr-only" id="time-note">Від початку запуску</span>
+              </div>
+            </div>
+            <div class="progress-panel panel">
+              <div class="progress-heading">
+                <span class="live-indicator" aria-hidden="true"></span
+                ><strong id="stage-label">Підготовка</strong
+                ><span id="progress-label"></span>
+              </div>
+              <progress
+                id="page-progress"
+                value="0"
+                max="30"
+                aria-label="Використано ліміт спроб завантаження сторінок"
+              ></progress>
+              <div class="stage-list sr-only" aria-label="Етапи">
+                <span data-stage="schema">01 · Схема</span
+                ><span data-stage="discovery">02 · Джерела</span
+                ><span data-stage="crawling">03 · Збір даних</span
+                ><span data-stage="storage">04 · Збереження</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="results-section" aria-labelledby="results-heading">
+            <div class="results-heading">
+              <div>
+                <h2 id="results-heading">
+                  Результати
+                  <span id="result-count" class="count-badge">0</span>
+                </h2>
+                <p id="dataset-note">
+                  Нові записи з’являтимуться тут під час збору.
+                </p>
+              </div>
+              <div class="result-actions" hidden>
+                <label class="result-search"
+                  ><span aria-hidden="true">⌕</span
+                  ><input
+                    id="result-filter"
+                    type="search"
+                    aria-label="Пошук серед результатів"
+                    placeholder="Знайти в результатах" /></label
+                ><button
+                  id="download-button"
+                  class="button button-quiet"
+                  type="button"
+                  disabled
+                >
+                  ↓ JSON
+                </button>
+              </div>
+            </div>
+            <div id="dataset-controls" class="dataset-controls" hidden>
+              <div class="dataset-toolbar">
+                <div
+                  class="view-switch"
+                  role="group"
+                  aria-label="Вигляд результатів"
+                >
+                  <button id="view-cards" type="button" aria-pressed="true">
+                    Картки
+                  </button>
+                  <button id="view-table" type="button" aria-pressed="false">
+                    Таблиця
+                  </button>
+                </div>
+                <span id="schema-note" class="sr-only"></span>
+                <button
+                  id="reset-filters"
+                  class="button button-quiet"
+                  type="button"
+                >
+                  Скинути фільтри
+                </button>
+              </div>
+              <details class="dataset-options">
+                <summary>
+                  Фільтри
+                  <span id="active-filter-count"></span>
+                </summary>
+                <div id="facet-controls" class="facet-grid"></div>
+              </details>
+              <details class="dataset-options">
+                <summary>Колонки <span aria-hidden="true">＋</span></summary>
+                <div id="column-controls" class="column-controls"></div>
+                <button
+                  id="auto-columns"
+                  class="button button-quiet"
+                  type="button"
+                >
+                  Автоматичний вибір
+                </button>
+              </details>
+            </div>
+            <div id="empty-state" class="empty-state panel">
+              <h3>Записів ще немає</h3>
+              <p>Опишіть запит і почніть збір.</p>
+            </div>
+            <p id="no-matches" class="no-matches" hidden>
+              За цим фільтром нічого не знайдено.
+            </p>
+            <div id="results" class="result-grid"></div>
+            <div id="result-table-wrapper" class="result-table-wrapper" hidden>
+              <table id="result-table" class="result-table">
+                <caption class="sr-only">
+                  Зібрані записи та обрані характеристики
+                </caption>
+                <thead></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+
+          <details id="activity" class="activity panel">
+            <summary>
+              <span
+                >Хід виконання
+                <span id="activity-count" class="count-badge">0</span></span
+              ><span aria-hidden="true">⌄</span>
+            </summary>
+            <div id="issues" class="issues"></div>
+            <ol id="activity-log" class="activity-log">
+              <li class="log-empty">Тут з’являться етапи та події збору.</li>
+            </ol>
+          </details>
+        </div>
+      </main>
+    </div>
+    <dialog id="record-dialog" aria-labelledby="detail-title">
+      <div class="dialog-header">
+        <div>
+          <h2 id="detail-title"></h2>
+        </div>
+        <button
+          id="close-dialog"
+          class="icon-button"
+          type="button"
+          aria-label="Закрити деталі"
+        >
+          ×
+        </button>
+      </div>
+      <div id="detail-content"></div>
+      <div class="dialog-footer">
+        <button id="copy-record" class="button button-quiet" type="button">
+          Копіювати JSON</button
+        ><button
+          id="close-dialog-bottom"
+          class="button button-primary"
+          type="button"
+        >
+          Готово
+        </button>
+      </div>
+    </dialog>
+  </body>
+</html>

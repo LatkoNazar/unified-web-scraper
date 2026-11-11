@@ -1,0 +1,137 @@
+.run-panel {
+  margin-top: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.run-heading {
+  margin-bottom: 12px;
+}
+.run-heading-text {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+.run-heading h2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-height: 3em;
+  overflow: hidden;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.status-badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  padding: 3px 7px;
+  border-radius: 3px;
+  font-size: 11px;
+  white-space: nowrap;
+  color: var(--olive);
+  background: var(--olive-soft);
+}
+.status-badge.success {
+  background: var(--olive);
+  color: #fff;
+}
+.status-badge.failed {
+  color: var(--red);
+  background: #f0ddd3;
+}
+.status-badge.cancelled,
+.status-badge.stopped,
+.status-badge.partial {
+  color: #8a381b;
+  background: #efdfcf;
+}
+.run-reason {
+  margin: 0 0 12px;
+  color: var(--orange-ink);
+  font-size: 13px;
+}
+.stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 26px;
+}
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+.stat-label {
+  order: 2;
+  font-size: 12px;
+  color: var(--muted);
+}
+.stat strong {
+  font-size: 17px;
+  font-weight: 550;
+  font-variant-numeric: tabular-nums;
+}
+.stat strong small {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.progress-panel {
+  display: grid;
+  gap: 7px;
+  padding: 12px 0 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.progress-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  font-size: 12px;
+}
+.progress-heading strong {
+  font-weight: 500;
+}
+.progress-heading > span:last-child {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 11px;
+}
+.live-indicator {
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: breathe 2s ease-in-out infinite;
+}
+.progress-panel.idle .live-indicator {
+  background: var(--olive);
+  animation: none;
+}
+progress {
+  width: 100%;
+  height: 3px;
+  border: 0;
+  appearance: none;
+  border-radius: 0;
+  background: #10110e13;
+}
+progress::-webkit-progress-bar {
+  background: #10110e13;
+}
+progress::-webkit-progress-value {
+  background: var(--olive);
+}
+progress::-moz-progress-bar {
+  background: var(--olive);
+}
+@keyframes breathe {
+  50% {
+    opacity: 0.3;
+  }
+}

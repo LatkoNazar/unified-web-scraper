@@ -1,0 +1,39 @@
+name: macbook-monitor
+content_profile: commerce
+assessment_profile: device
+currency_aliases:
+  UAH: UAH
+  грн: UAH
+  грн.: UAH
+  ₴: UAH
+sources:
+  - url: https://www.olx.ua/uk/
+  - url: https://prom.ua/ua/
+  - url: https://rozetka.com.ua/ua/
+search: MacBook Air 15 M4
+schema_path: ../schemas/macbook.schema.json
+outputs:
+  - jsonl
+  - parquet
+crawl:
+  backend: browser
+  max_pages: 15
+  max_records: 30
+  concurrency: 1
+  max_depth: 4
+  delay: 1
+ai:
+  enabled: true
+  model: qwen/qwen3.7-flash
+  decision_model: openai/gpt-6-luna-decisions
+  response_mode: auto
+  routing: hybrid
+  reasoning: false
+  sparse_enrichment: true
+  max_calls: 30
+navigation:
+  mode: hybrid
+assessment:
+  - is_relevant
+  - has_mdm_risk
+  - requires_manual_review

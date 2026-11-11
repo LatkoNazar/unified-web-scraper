@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Article",
+  "x-entity-types": ["Article", "NewsArticle", "BlogPosting"],
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["title", "url"],
+  "properties": {
+    "title": {"type": "string", "minLength": 1},
+    "url": {"type": "string", "format": "uri"},
+    "summary": {
+      "type": ["string", "null"],
+      "x-source": "description",
+      "description": "Summary explicitly published by the source."
+    },
+    "author_name": {
+      "type": ["string", "null"],
+      "x-source": "/author/name",
+      "description": "Named author of the article; unknown remains null."
+    },
+    "published_on": {
+      "type": ["string", "null"],
+      "x-source": "datePublished",
+      "description": "Publication date as supplied, without inventing a timezone."
+    },
+    "body_text": {
+      "type": ["string", "null"],
+      "x-source": "articleBody",
+      "description": "Article text present in the selected evidence."
+    }
+  }
+}

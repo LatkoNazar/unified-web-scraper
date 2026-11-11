@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MacBook listing",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["title", "price", "currency", "url"],
+  "properties": {
+    "title": {"type": "string", "minLength": 1},
+    "url": {"type": "string", "format": "uri", "description": "Canonical URL of this individual listing, without tracking parameters."},
+    "external_id": {"type": ["string", "null"]},
+    "description": {"type": ["string", "null"], "description": "Seller's description of this listing, preserving source claims."},
+    "price": {"type": ["number", "null"], "minimum": 0},
+    "currency": {"type": ["string", "null"], "pattern": "^[A-Z]{3}$"},
+    "chip": {"type": ["string", "null"], "description": "Explicit Apple chip normalized as M4, M4 Pro, M4 Max, etc. Do not infer missing hardware specifications."},
+    "screen_inches": {"type": ["number", "null"], "description": "Screen size explicitly stated in the title or description. Retain the advertised nominal 15 if no exact diagonal is stated."},
+    "ram_gb": {"type": ["integer", "null"], "minimum": 1},
+    "storage_gb": {"type": ["integer", "null"], "minimum": 1, "description": "Advertised nominal SSD capacity in GB. Convert explicitly stated TB to 1024 GB. If the title says 512 and description says 500, retain title capacity 512 and list this disagreement in source_conflicts."},
+    "listing_type": {"enum": ["device", "parts", "accessory", "service", null], "description": "What is being sold: complete laptop device, parts/disassembly (розбірка/запчастини), accessory or service. Do not treat a parts listing as a working laptop."},
+    "condition": {"enum": ["new", "used", "refurbished", "open_box", null]},
+    "battery_cycles": {"type": ["integer", "null"], "minimum": 0, "description": "Explicit battery charge cycle count, unknown is null."},
+    "battery_health": {"type": ["number", "null"], "minimum": 0, "maximum": 100},
+    "mdm_status": {"enum": ["claimed_clear", "claimed_managed", "claimed_bypass", null], "description": "Only an EXPLICIT statement about MDM, remote management or corporate enrollment. Claimed_clear requires explicit denial of MDM/corporate enrollment. No iCloud lock, signing out of Apple ID, clean/reset Mac or 'everything works' does NOT prove absence of MDM: return null. A claim is never a verified device check."},
+    "source_conflicts": {"type": "array", "items": {"type": "string"}, "description": "Explicit contradictions within the listing (e.g. different SSD capacities in title and description). Empty array if none observed; do not invent conflicts."}
+  }
+}

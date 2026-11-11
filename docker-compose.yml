@@ -1,0 +1,21 @@
+name: unified-web-parser-dev
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: parser
+      POSTGRES_USER: parser
+      POSTGRES_PASSWORD: ${PARSER_POSTGRES_PASSWORD:-parser_dev_only}
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - parser_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U parser -d parser"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  parser_postgres_data:

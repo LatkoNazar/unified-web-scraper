@@ -1,0 +1,36 @@
+name: web-auto
+content_profile: generic
+assessment_profile: generic
+sources: []
+search: Знайди наукові статті про океан. Збери назву, авторів, дату публікації та URL.
+schema_generation:
+  enabled: true
+  max_fields: 20
+outputs: [jsonl, parquet]
+discovery:
+  enabled: true
+  query_mode: ai
+  max_queries: 3
+  search_results: 25
+  max_sites: 25
+  entrypoint: site_root
+  pages_per_site: 5
+  engine: parallel
+  mode: basic
+  cache_ttl_seconds: 3600
+crawl:
+  backend: browser
+  max_pages: 125
+  max_records: 100
+  max_depth: 3
+  concurrency: 1
+  delay: 1
+ai:
+  enabled: true
+  model: qwen/qwen3.7-flash
+  decision_model: openai/gpt-6-luna-decisions
+  routing: hybrid
+  reasoning: false
+  max_calls: 100
+navigation:
+  mode: hybrid

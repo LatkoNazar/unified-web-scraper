@@ -1,0 +1,34 @@
+name: macbooks-m5-open-box
+content_profile: commerce
+assessment_profile: device
+currency_aliases:
+  UAH: UAH
+  грн: UAH
+  грн.: UAH
+  ₴: UAH
+sources:
+  - url: https://www.olx.ua/
+search: MacBook M5
+schema_path: ../schemas/macbook.schema.json
+outputs: [jsonl, parquet]
+crawl:
+  backend: browser
+  max_pages: 18
+  max_records: 18
+  max_depth: 3
+  concurrency: 1
+  delay: 1
+ai:
+  enabled: true
+  model: qwen/qwen3.7-flash
+  decision_model: openai/gpt-6-luna-decisions
+  response_mode: auto
+  routing: hybrid
+  reasoning: false
+  sparse_enrichment: true
+  max_calls: 30
+navigation:
+  mode: rules
+assessment:
+  - has_mdm_risk
+  - requires_manual_review

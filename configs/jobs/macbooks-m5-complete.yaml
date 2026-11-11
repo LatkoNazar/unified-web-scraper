@@ -1,0 +1,45 @@
+name: macbooks-m5-market
+content_profile: commerce
+assessment_profile: device
+currency_aliases:
+  UAH: UAH
+  грн: UAH
+  грн.: UAH
+  ₴: UAH
+sources:
+- url: https://www.olx.ua/uk/elektronika/noutbuki-i-aksesuary/noutbuki/q-macbook-m5/
+search: MacBook M5
+schema_path: ../schemas/macbook-market.schema.json
+outputs:
+- jsonl
+- parquet
+crawl:
+  backend: browser
+  max_pages: 10000
+  max_records: 10000
+  max_depth: 10
+  concurrency: 1
+  delay: 0.5
+  timeout: 45
+  retries: 1
+  render_delay: 0.5
+ai:
+  enabled: true
+  model: qwen/qwen3.7-flash
+  decision_model: openai/gpt-6-luna-decisions
+  response_mode: auto
+  routing: hybrid
+  reasoning: false
+  sparse_enrichment: true
+  max_calls: 1500
+  max_candidates: 200
+navigation:
+  mode: rules
+  max_actions: 190
+  max_interactions_per_url: 30
+  allow_filters: false
+  allow_scroll: false
+assessment:
+- is_relevant
+- has_mdm_risk
+- requires_manual_review

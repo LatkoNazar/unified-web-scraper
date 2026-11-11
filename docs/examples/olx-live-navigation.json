@@ -1,0 +1,91 @@
+{
+  "provenance": {
+    "run_id": "a25af68253144721aba23ba8915f3977",
+    "description": "Historical live-browser crawl that originally acquired the same five saved detail snapshots used in the optimized replay.",
+    "scope": "This manifest proves six fetched Page results in order, not an exact browser HTTP/subrequest HAR. It records final page URLs and statuses.",
+    "historical_ai_model": "openai/gpt-4.1-mini",
+    "historical_model_note": "This earlier crawl used gpt-4.1-mini. The Qwen/Decisions optimized extraction trace is a separate later replay; these are not one single historical run."
+  },
+  "page_results": [
+    {
+      "sequence": 1,
+      "page_id": "bc9244d3b49a8b6c7e1e7c33219c08a632a7d1e642fb08f763be6408923c351a",
+      "url": "https://www.olx.ua/uk/list/q-macbook-air-15-m4/",
+      "fetched_at": "2026-10-22T11:42:22.785404Z",
+      "status_code": 200,
+      "snapshot_ref": "D:\\unified-web-scraper\\data\\snapshots\\bc9244d3b49a8b6c7e1e7c33219c08a632a7d1e642fb08f763be6408923c351a.html",
+      "extractable": false
+    },
+    {
+      "sequence": 2,
+      "page_id": "c4a76a696a634c543ee1fe0064aeac3611ffa37cdfe09370efc6653dacf31884",
+      "url": "https://www.olx.ua/d/uk/obyavlenie/utsnka-opis-macbook-air-15-2025-m4-16gb-512-ssd-a3241-61tsikl-ID10p7PD.html",
+      "fetched_at": "2026-10-22T11:42:26.663851Z",
+      "status_code": 200,
+      "snapshot_ref": "D:\\unified-web-scraper\\data\\snapshots\\c4a76a696a634c543ee1fe0064aeac3611ffa37cdfe09370efc6653dacf31884.html",
+      "extractable": true
+    },
+    {
+      "sequence": 3,
+      "page_id": "e57f70ed9871f8825afaa8fb17f03272bb62aee1e3d0ab463c8a6e5dd426c7c1",
+      "url": "https://www.olx.ua/d/uk/obyavlenie/apple-macbook-air-13-6-2025-apple-m4-24gb-512gb-ssd-starlight-mc6a4-garantya-ID10JStL.html",
+      "fetched_at": "2026-10-22T11:42:33.807918Z",
+      "status_code": 200,
+      "snapshot_ref": "D:\\unified-web-scraper\\data\\snapshots\\e57f70ed9871f8825afaa8fb17f03272bb62aee1e3d0ab463c8a6e5dd426c7c1.html",
+      "extractable": true
+    },
+    {
+      "sequence": 4,
+      "page_id": "6e1968d6aa5b051798d971ea81d0b617fdfa5157f7f2b8430d40a335da61b409",
+      "url": "https://www.olx.ua/d/uk/obyavlenie/macbook-air-15-m4-32-gb-512gb-ID11hxTM.html",
+      "fetched_at": "2026-10-22T11:42:39.027843Z",
+      "status_code": 200,
+      "snapshot_ref": "D:\\unified-web-scraper\\data\\snapshots\\6e1968d6aa5b051798d971ea81d0b617fdfa5157f7f2b8430d40a335da61b409.html",
+      "extractable": true
+    },
+    {
+      "sequence": 5,
+      "page_id": "79b46a391aca61a0ff66deb5112bd7f9aeddc43a7fae3438125df5a8f103deae",
+      "url": "https://www.olx.ua/d/uk/obyavlenie/macbook-air-15-2025-m4-16gb-256gb-midnight-ID11vdmR.html",
+      "fetched_at": "2026-10-22T11:42:47.440703Z",
+      "status_code": 200,
+      "snapshot_ref": "D:\\unified-web-scraper\\data\\snapshots\\79b46a391aca61a0ff66deb5112bd7f9aeddc43a7fae3438125df5a8f103deae.html",
+      "extractable": true
+    },
+    {
+      "sequence": 6,
+      "page_id": "29412cf04bf5ebe6d5db90def01fb14f990e4b8a6fba7b718fb3c4ee0d9bc73c",
+      "url": "https://www.olx.ua/d/uk/obyavlenie/rozbrka-midnight-macbook-air-15-m4-2025-a3241-IDWOZdC.html",
+      "fetched_at": "2026-10-22T11:42:54.526345Z",
+      "status_code": 200,
+      "snapshot_ref": "D:\\unified-web-scraper\\data\\snapshots\\29412cf04bf5ebe6d5db90def01fb14f990e4b8a6fba7b718fb3c4ee0d9bc73c.html",
+      "extractable": true
+    }
+  ],
+  "historical_run_summary": {
+    "run_id": "a25af68253144721aba23ba8915f3977",
+    "job_name": "macbook-monitor",
+    "status": "success",
+    "started_at": "2026-10-22T11:42:13.576648Z",
+    "finished_at": "2026-10-22T11:42:56.990716Z",
+    "pages_attempted": 6,
+    "pages_fetched": 6,
+    "records_written": 5,
+    "invalid_records": 0,
+    "errors": [],
+    "warnings": [],
+    "artifacts": {
+      "directory": "D:\\unified-web-scraper\\data\\runs\\a25af68253144721aba23ba8915f3977",
+      "summary": "D:\\unified-web-scraper\\data\\runs\\a25af68253144721aba23ba8915f3977\\summary.json",
+      "jsonl": "D:\\unified-web-scraper\\data\\runs\\a25af68253144721aba23ba8915f3977\\records.jsonl",
+      "parquet": "D:\\unified-web-scraper\\data\\runs\\a25af68253144721aba23ba8915f3977\\records.parquet"
+    },
+    "ai": {
+      "calls": 5,
+      "cache_hits": 0,
+      "input_tokens": 6858,
+      "output_tokens": 376,
+      "model": "openai/gpt-4.1-mini"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+name: travel-books
+content_profile: commerce
+currency_aliases:
+  £: GBP
+sources:
+  - url: https://books.toscrape.com/
+search: Travel
+schema_path: ../schemas/catalog-item.schema.json
+outputs: [jsonl, parquet]
+crawl:
+  backend: http
+  max_pages: 8
+  max_records: 3
+  max_depth: 4
+  concurrency: 1
+  delay: 1
+ai:
+  enabled: true
+  model: qwen/qwen3.7-flash
+  decision_model: openai/gpt-6-luna-decisions
+  routing: hybrid
+  reasoning: false
+  max_calls: 12
+navigation:
+  mode: hybrid

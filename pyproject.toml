@@ -1,0 +1,52 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "unified-web-parser"
+version = "0.2.0"
+description = "Schema-driven web data pipeline with explicit candidate routing"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2,<3",
+    "PyYAML>=6,<7",
+    "jsonschema>=4,<5",
+    "httpx>=0.28,<1",
+    "beautifulsoup4>=4.13,<5",
+    "tldextract>=5.3,<6",
+    "python-dotenv>=1,<2",
+    "pyarrow>=20,<27",
+    "psycopg[binary]>=3.2,<4",
+    "fastapi>=0.115,<1",
+    "uvicorn>=0.34,<1",
+    "rfc3339-validator>=0.1.4,<1",
+]
+
+[project.optional-dependencies]
+browser = ["crawl4ai>=0.9.5,<1"]
+
+[project.scripts]
+unified-parser = "unified_web_parser.interfaces.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-asyncio>=0.25,<2", "ruff>=0.11,<1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/unified_web_parser"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+filterwarnings = [
+    "error::DeprecationWarning",
+    "error::PendingDeprecationWarning",
+    "error::FutureWarning",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "RUF043", "RUF100"]

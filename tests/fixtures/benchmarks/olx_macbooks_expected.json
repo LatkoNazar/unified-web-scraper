@@ -1,0 +1,29 @@
+{
+  "description": "Source-reviewed invariants for five saved OLX listings; seller claims are not verified device facts.",
+  "expected_records": 5,
+  "expected_relevant": 3,
+  "records": {
+    "922121141": {
+      "fields": {"price": 49000, "currency": "UAH", "ram_gb": 16, "storage_gb": 512, "chip": "M4", "battery_cycles": 61, "battery_health": 100, "listing_type": "device", "mdm_status": "claimed_clear"},
+      "is_relevant": true,
+      "conflict_numbers": ["512", "500"]
+    },
+    "927067013": {
+      "fields": {"price": 66600, "currency": "UAH", "ram_gb": 24, "storage_gb": 512, "chip": "M4", "battery_cycles": null, "battery_health": null, "listing_type": "device", "screen_inches": 13.6, "mdm_status": "claimed_clear"},
+      "is_relevant": false
+    },
+    "935091054": {
+      "fields": {"price": 75000, "currency": "UAH", "ram_gb": 32, "storage_gb": 512, "chip": "M4", "battery_cycles": null, "battery_health": 100, "listing_type": "device", "mdm_status": "claimed_clear"},
+      "is_relevant": true
+    },
+    "938587053": {
+      "fields": {"price": 52000, "currency": "UAH", "ram_gb": 16, "storage_gb": 256, "chip": "M4", "battery_cycles": 30, "listing_type": "device", "mdm_status": "claimed_clear"},
+      "allowed_fields": {"battery_health": [null, 100]},
+      "is_relevant": true
+    },
+    "854402880": {
+      "fields": {"price": 20000, "currency": "UAH", "ram_gb": null, "storage_gb": null, "battery_cycles": null, "battery_health": null, "listing_type": "parts", "mdm_status": null},
+      "is_relevant": false
+    }
+  }
+}

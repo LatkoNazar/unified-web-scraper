@@ -1,0 +1,274 @@
+@media (min-width: 1700px) {
+  .result-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 1150px) {
+  .workspace {
+    grid-template-columns: 164px minmax(0, 1fr);
+  }
+  .sidebar {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  .topbar {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+  .content {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+  .result-grid,
+  .facet-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 800px) {
+  .workspace {
+    display: block;
+  }
+  .sidebar {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    height: auto;
+    padding: 14px 20px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    font-size: 24px;
+  }
+  .new-search {
+    margin: 0;
+    width: auto;
+    min-height: 38px;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  .history-disclosure {
+    display: block;
+    grid-column: 1 / -1;
+  }
+  .history-disclosure > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 32px;
+    cursor: pointer;
+    font-size: 12px;
+    list-style: none;
+    color: var(--muted);
+  }
+  .history-disclosure > summary::-webkit-details-marker {
+    display: none;
+  }
+  .history-disclosure[open] .sidebar-heading {
+    border-top: 0;
+  }
+  .sidebar-heading > span {
+    visibility: hidden;
+  }
+  .history {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 12px;
+    max-height: 220px;
+    padding-bottom: 12px;
+  }
+  .sidebar-bottom {
+    display: none;
+  }
+  .topbar {
+    padding: 12px 20px;
+    min-height: 76px;
+    gap: 10px;
+  }
+  .content {
+    padding: 18px 20px 24px;
+  }
+  .run-actions {
+    gap: 12px;
+  }
+  .cost-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 2px;
+    max-width: 180px;
+  }
+  #cost-value {
+    font-size: 22px;
+  }
+  #cost-label,
+  #cost-note {
+    font-size: 11px;
+  }
+  .run-heading-text {
+    align-items: start;
+  }
+}
+@media (max-width: 520px) {
+  .sidebar {
+    padding: 12px 16px 0;
+  }
+  .topbar {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  h1 {
+    font-size: 23px;
+  }
+  .connection {
+    font-size: 11px;
+  }
+  .cost-summary {
+    max-width: 125px;
+  }
+  #cost-label {
+    font-size: 11px;
+  }
+  #cost-note {
+    font-size: 10px;
+    line-height: 1.3;
+  }
+  #cost-value {
+    font-size: 20px;
+  }
+  #cancel-button {
+    padding: 8px 9px;
+    min-height: 40px;
+    font-size: 12px;
+  }
+  .content {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+  .composer form {
+    grid-template-columns: 1fr;
+    padding: 12px 14px 0;
+  }
+  .composer textarea {
+    min-height: 64px;
+    font-size: 16px;
+  }
+  .composer-bottom {
+    padding: 5px 0 12px;
+  }
+  .button-primary {
+    min-width: 145px;
+  }
+  .quick-options {
+    gap: 10px;
+  }
+  .limit-grid {
+    gap: 8px;
+  }
+  .limit-grid label {
+    font-size: 11px;
+  }
+  .limit-grid input {
+    padding: 8px;
+  }
+  .compact-select select,
+  .limit-grid input,
+  .advanced-content textarea {
+    font-size: 16px;
+  }
+  .run-heading-text {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px 16px;
+  }
+  .progress-heading {
+    flex-wrap: wrap;
+    font-size: 12px;
+  }
+  .progress-heading > span:last-child {
+    font-size: 11px;
+  }
+  .results-heading {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .result-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .result-search {
+    flex: 1;
+  }
+  .result-search input {
+    width: 100%;
+    font-size: 16px;
+  }
+  .dataset-toolbar {
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+  .facet-grid,
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+  .facet-inputs input,
+  .facet-control select {
+    font-size: 16px;
+  }
+  .record-media {
+    height: 205px;
+  }
+  .record-title {
+    min-height: 0;
+    font-size: 14px;
+  }
+  .record-body {
+    padding: 16px 16px 0;
+  }
+  .record-fields > div {
+    padding: 7px 0;
+  }
+  .record-footer {
+    min-height: 45px;
+  }
+  .record-footer button {
+    min-height: 44px;
+  }
+  dialog {
+    padding: 19px;
+  }
+  .dialog-header h2 {
+    font-size: 25px;
+  }
+  .detail-table > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+@media (max-width: 360px) {
+  .topbar {
+    flex-wrap: wrap;
+  }
+  .run-actions {
+    justify-content: space-between;
+    width: 100%;
+  }
+  .cost-summary {
+    align-items: start;
+    text-align: left;
+    max-width: 200px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
